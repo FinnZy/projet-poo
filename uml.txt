@@ -1,0 +1,26 @@
+@startuml
+Joueur --|> Grille
+Jeton --|> Grille
+Grille --|> Main
+Joueur --* Jeton : joueur
+Humain --|> Joueur
+IA --|> Joueur
+
+Joueur : String type
+Joueur : char motif
+Joueur : Joueur()
+Joueur : Joueur(int numero, String nom, String type, char motif)
+Joueur : char getMotif(Joueur joueur)
+Joueur : char setMotif(Joueur joueur, char motif)
+
+Humain : int numero
+Humain : char motif
+Humain : Humain()
+Humain : Humain(int numero, char motif)
+
+Grille : Grille()
+Grille : Grille(Joueur joueur1, Jo)
+
+Jeton : int x
+Jeton : int y
+@enduml
