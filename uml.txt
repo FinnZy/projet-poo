@@ -1,39 +1,38 @@
 @startuml
-Joueur --* Partie : joueur
-Partie --* Jeu : partie
+Joueur --* Plateau : joueur
+Plateau --* Partie : plateau
 Humain --|> Joueur
-Ordinateur --|> Joueur
+IA --|> Joueur
 
-Ordinateur : Ordinateur(String motif)
-Ordinateur : void avancer(Jeu jeu)
+IA : IA(int motif)
+IA : void jouerTour(Jeu jeu)
 
-Humain : Humain(String nom, String motif)
-Humain : void jouer(Jeu jeu)
+Humain : Humain(String nom, int motif)
+Humain : void jouerTour(Jeu jeu)
 
 Joueur : String nom
-Joueur : String motif
-Joueur : Joueur(String nom, String motif)
+Joueur : int motif
+Joueur : Joueur(String nom, int motif)
 Joueur : String getNom()
 Joueur : int getCouleur()
-Joueur : void jouer(Jeu jeu)
+Joueur : void jouerTour(Jeu jeu)
 
-Partie : Partie(Joueur joueur1, Joueur joueur2)
-Partie : void jouer()
+Plateau : Plateau(Joueur joueur1, Joueur joueur2)
+Plateau : void jouer()
 
-Jeu : int taille
-Jeu : int[][] grille
-Jeu : boolean debut
-Jeu : Jeu(int taille)
-Jeu : Jeu()
-Jeu : void finDuJeu(String)
-Jeu : void initJeu(int)
-Jeu : boolean joueCoup(int, int)
-Jeu : boolean cherche4()
-Jeu : boolean cherche4alignes(int, int, int, int)
-Jeu : boolean iaPlay(int)
-Jeu : int getNearCase(int, int)
-Jeu : boolean estPlein()
-Jeu : int getTaille()
+Partie : int[6][7] grille
+Partie : Partie(int[][] grille)
+Partie : Partie()
+Partie : void finPartie(String nom)
+Partie : void creerGrille()
+Partie : void afficherGrille(Joueur joueur1, Joueur joueur2)
+Partie : boolean jouerCoup(int col, Joueur joueur)
+Partie : boolean cherche()
+Partie : boolean chercheAlignes(int oCol, int oLigne, int dCol, int dLigne)
+Partie : boolean iaPlay(int)
+Partie : int getNearCase(int, int)
+Partie : boolean estPlein()
+Partie : int getTaille()
 
 Puissance4 : Scanner scanner
 Puissance4 : Puissance4()
