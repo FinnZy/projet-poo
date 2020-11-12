@@ -1,26 +1,41 @@
 @startuml
-Joueur --|> Grille
-Jeton --|> Grille
-Grille --|> Main
-Joueur --* Jeton : joueur
+Joueur --* Partie : joueur
+Partie --* Jeu : partie
 Humain --|> Joueur
-IA --|> Joueur
+Ordinateur --|> Joueur
 
-Joueur : String type
-Joueur : char motif
-Joueur : Joueur()
-Joueur : Joueur(int numero, String nom, String type, char motif)
-Joueur : char getMotif(Joueur joueur)
-Joueur : char setMotif(Joueur joueur, char motif)
+Ordinateur : Ordinateur(String motif)
+Ordinateur : void avancer(Jeu jeu)
 
-Humain : int numero
-Humain : char motif
-Humain : Humain()
-Humain : Humain(int numero, char motif)
+Humain : Humain(String nom, String motif)
+Humain : void jouer(Jeu jeu)
 
-Grille : Grille()
-Grille : Grille(Joueur joueur1, Jo)
+Joueur : String nom
+Joueur : String motif
+Joueur : Joueur(String nom, String motif)
+Joueur : String getNom()
+Joueur : int getCouleur()
+Joueur : void jouer(Jeu jeu)
 
-Jeton : int x
-Jeton : int y
+Partie : Partie(Joueur joueur1, Joueur joueur2)
+Partie : void jouer()
+
+Jeu : int taille
+Jeu : int[][] grille
+Jeu : boolean debut
+Jeu : Jeu(int taille)
+Jeu : Jeu()
+Jeu : void finDuJeu(String)
+Jeu : void initJeu(int)
+Jeu : boolean joueCoup(int, int)
+Jeu : boolean cherche4()
+Jeu : boolean cherche4alignes(int, int, int, int)
+Jeu : boolean iaPlay(int)
+Jeu : int getNearCase(int, int)
+Jeu : boolean estPlein()
+Jeu : int getTaille()
+
+Puissance4 : Scanner scanner
+Puissance4 : Puissance4()
+Puissance4 : void main(String[])
 @enduml
