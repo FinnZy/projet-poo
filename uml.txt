@@ -4,7 +4,7 @@ Plateau --* Partie : plateau
 Humain --|> Joueur
 IA --|> Joueur
 
-IA : IA(int motif)
+IA : IA(String nom, int motif)
 IA : void jouerTour(Jeu jeu)
 
 Humain : Humain(String nom, int motif)
@@ -29,9 +29,9 @@ Partie : void afficherGrille(Joueur joueur1, Joueur joueur2)
 Partie : boolean jouerCoup(int col, Joueur joueur)
 Partie : boolean cherche()
 Partie : boolean chercheAlignes()
+Partie : boolean estPlein()
 Partie : boolean iaAvance(Joueur joueur)
 Partie : int caseProche(int ligne, int colonne)
-Partie : boolean estPlein()
 Partie : int getTaille()
 
 Puissance4 : Scanner scanner
