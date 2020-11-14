@@ -28,13 +28,13 @@ Partie : void creerGrille()
 Partie : void afficherGrille(Joueur joueur1, Joueur joueur2)
 Partie : boolean jouerCoup(int col, Joueur joueur)
 Partie : boolean cherche()
-Partie : boolean chercheAlignes(int oCol, int oLigne, int dCol, int dLigne)
-Partie : boolean iaPlay(int)
-Partie : int getNearCase(int, int)
+Partie : boolean chercheAlignes()
+Partie : boolean iaAvance(Joueur joueur)
+Partie : int caseProche(int ligne, int colonne)
 Partie : boolean estPlein()
 Partie : int getTaille()
 
 Puissance4 : Scanner scanner
 Puissance4 : Puissance4()
-Puissance4 : void main(String[])
+Puissance4 : public static void main(String[] args)
 @enduml
