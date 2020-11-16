@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package jeu;
 
 public class Analyse extends Partie {
@@ -103,7 +102,3 @@ public class Analyse extends Partie {
 
         return -1;
     }
-=======
-package jeu;public class Analyse {
->>>>>>> edc4d261f9c11e1ec87f3ec245967963fe83984e
-}
