@@ -1,8 +1,6 @@
 package joueur;
 
-import jeu.Partie;
-import jeu.Plateau;
-import jeu.Analyse;
+import jeu.*;
 
 public class IA extends Joueur {
 
@@ -20,7 +18,7 @@ public class IA extends Joueur {
 
     public int jouerTour(Joueur ia, Partie partie, Analyse analyse){
         boolean aDeposer = true;
-        if(analyse.estPlein() == true){
+        if(analyse.estPlein()){
             aDeposer = false;
         }
         else{
@@ -32,10 +30,12 @@ public class IA extends Joueur {
                 }
 
                 else {
-                    partie.setCaseGrille(x, ia.motif);
+                    partie.setCaseGrille((int) x, ia.motif);
                     aDeposer = false;
                 }
             }
         }
+
+        return 0;
     }
 }

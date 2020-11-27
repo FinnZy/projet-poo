@@ -1,7 +1,6 @@
 package joueur;
 
-import jeu.Partie;
-import jeu.Plateau;
+import jeu.*;
 
 public abstract class Joueur {
 
