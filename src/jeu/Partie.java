@@ -32,17 +32,18 @@ public class Partie {
     }
 
     void afficherGrille(Partie p) {
-        String s = new String();
+        StringBuilder s = new StringBuilder(new String());
         int[][] grille = p.getGrille();
-        s = s + "1";
-        for (i = 2; i <= p.getGrilleCol; i++) {
-            s = s + " " + i.toString();
+        s.append("1");
+        for (int i = 2; i <= p.getGrilleCol(); i++) {
+            String tmp = String.format("%d", i);
+            s.append(" ").append(tmp);
         }
         System.out.println(s);
-        for (j = 1; j <= p.getGrilleLigne; j++) {
-            s = "\0";
-            for (i = 1; i <= p.getGrilleCol; i++) {
-                s = s + getMotifAffichage(grille[j][i]) + " ";
+        for (int j = 1; j <= p.getGrilleLigne(); j++) {
+            s = new StringBuilder("\0");
+            for (int i = 1; i <= p.getGrilleCol(); i++) {
+                s.append(getMotifAffichage(grille[j][i])).append(" ");
             }
             System.out.println(s);
         }
@@ -51,10 +52,26 @@ public class Partie {
 
     //Setters & Getters
     int[][] getGrille() { return this.grille; }
+
     int getGrilleLigne() { return this.grilleLigne; }
+
     int getGrilleCol() { return this.grilleCol; }
-    void setGrilleTailleX(int grilleLigne) { this.grilleLigne = grilleLigne; }
-    void setGrilleTailleY(int grilleCol) { this.grilleCol = grilleCol; }
+
+    void setGrilleLigne(int grilleLigne) { this.grilleLigne = grilleLigne; }
+
+    void setGrilleCol(int grilleCol) { this.grilleCol = grilleCol; }
+
+    int caseDisponible(int y) {
+        int currX = 0;
+        while (currX < grilleLigne) {
+            if (grille[currX][y] != 0)
+                currX++;
+            else
+                return currX;
+        }
+        return -1;
+    }
+
     void setCaseGrille(int colonne, int motif) {
         int ligne = caseDisponible(colonne);
         if (ligne != -1) {
