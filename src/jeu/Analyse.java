@@ -102,3 +102,4 @@ public class Analyse extends Partie {
 
         return -1;
     }
+
