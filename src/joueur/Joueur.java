@@ -32,7 +32,7 @@ public abstract class Joueur {
         this.motif = motif;
     }
 
-    public abstract void jouerTour(Joueur joueur);
+    public abstract void jouerTour();
 
 
 
