@@ -32,5 +32,5 @@ public abstract class Joueur {
         this.motif = motif;
     }
 
-    public abstract int jouerTour(Joueur joueur, Partie partie);
+    public abstract int jouerTour(Joueur joueur, Partie partie, Analyse analyse);
 }
