@@ -1,4 +1,6 @@
-package jeu;public class Partie {
+package jeu;
+
+public class Partie {
     int[][] grille;
 
     int vide = 0;
@@ -58,6 +60,19 @@ package jeu;public class Partie {
         if (ligne != -1) {
             this.grille[ligne][colonne] = motif;
         }
+    }
+
+    int caseDisponible(int y) {
+        int currX = 0;
+
+        while (currX < grilleLigne) {
+            if (grille[currX][y] != 0)
+                currX++;
+            else
+                return currX;
+        }
+
+        return -1;
     }
 
     public static void main(String[] args) {

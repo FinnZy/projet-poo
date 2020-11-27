@@ -11,8 +11,8 @@ public class Analyse extends Partie {
     // Constructors
     Analyse() {
         this.grille = getGrille();
-        this.grilleTailleX = getGrilleTailleY();
-        this.grilleTailleY = getGrilleTailleY();
+        this.grilleTailleX = getGrilleLigne();
+        this.grilleTailleY = getGrilleCol();
     }
 
     // Cherche de potentiels jetons alignés
@@ -40,7 +40,7 @@ public class Analyse extends Partie {
                 }
 
                 // Diagonale gauche
-                if (true == chercheAlignes(grilleTailleX - x), y, -1, 1) {
+                if (true == chercheAlignes(grilleTailleX - x),y, -1, 1){
                     return true;
                 }
             }
@@ -89,16 +89,4 @@ public class Analyse extends Partie {
         // Si aucune case vide n'a été trouvée, la grille est pleine
         return true;
     }
-
-    int caseDisponible(int y) {
-        int currX = 0;
-
-        while (currX < grilleTailleX) {
-            if (grille[currX][y] != 0)
-                currX++;
-            else
-                return currX;
-        }
-
-        return -1;
-    }
+}
