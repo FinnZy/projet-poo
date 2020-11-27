@@ -79,19 +79,6 @@ public class Partie {
         }
     }
 
-    int caseDisponible(int y) {
-        int currX = 0;
-
-        while (currX < grilleLigne) {
-            if (grille[currX][y] != 0)
-                currX++;
-            else
-                return currX;
-        }
-
-        return -1;
-    }
-
     public static void main(String[] args) {
 
     }

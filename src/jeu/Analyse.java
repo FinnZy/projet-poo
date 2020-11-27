@@ -40,7 +40,7 @@ public class Analyse extends Partie {
                 }
 
                 // Diagonale gauche
-                if (chercheAlignes(grilleTailleX - x, y, -1, 1){
+                if (chercheAlignes(grilleTailleX - x, y, -1, 1)) {
                     return true;
                 }
             }
