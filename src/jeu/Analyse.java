@@ -1,46 +1,36 @@
 package jeu;
 
 public class Analyse extends Partie {
-    private int[][] grille;
-
-    private int X = 1;
-    private int O = 2;
-    private int grilleTailleX;
-    private int grilleTailleY;
-
     // Constructors
     Analyse() {
-        this.grille = getGrille();
-        this.grilleTailleX = getGrilleLigne();
-        this.grilleTailleY = getGrilleCol();
     }
 
     // Cherche de potentiels jetons alignés
-    boolean cherche() {
+    public boolean cherche() {
         // Cherche horizontalement
-        for (int y = 0; y < grilleTailleY; y++) {
+        for (int y = 0; y < this.getGrilleCol(); y++) {
             if (chercheAlignes(0, y, 1, 0)) {
                 return true;
             }
         }
 
         // Cherche verticalement
-        for (int x = 0; x < grilleTailleX; x++) {
+        for (int x = 0; x < this.getGrilleLigne(); x++) {
             if (chercheAlignes(x, 0, 0, 1)) {
                 return true;
             }
         }
 
         // Cherche sur les diagonales gauche et droite
-        for (int x = 0; x < grilleTailleX; x++) {
-            for (int y = 0; y < grilleTailleY; y++) {
+        for (int x = 0; x < this.getGrilleLigne(); x++) {
+            for (int y = 0; y < this.getGrilleCol(); y++) {
                 // Diagonale droite
                 if (chercheAlignes(x, y, 1, 1)) {
                     return true;
                 }
 
                 // Diagonale gauche
-                if (chercheAlignes(grilleTailleX - x, y, -1, 1)) {
+                if (chercheAlignes(this.getGrilleCol() - x, y, -1, 1)) {
                     return true;
                 }
             }
@@ -50,12 +40,16 @@ public class Analyse extends Partie {
         return false;
     }
 
-    boolean chercheAlignes(int debutX, int debutY, int pasX, int pasY) {
+    public boolean chercheAlignes(int debutX, int debutY, int pasX, int pasY) {
         int compteur = 0;
         int currMotif = 0;
 
         int currX = debutX;
         int currY = debutY;
+
+        int[][] grille = this.getGrille();
+        int grilleTailleY = this.getGrilleCol();
+        int grilleTailleX = this.getGrilleLigne();
 
         currMotif = grille[currX][currY];
 
@@ -77,11 +71,11 @@ public class Analyse extends Partie {
         return false;
     }
 
-    boolean estPlein() {
-        for (int x = 0; x < grilleTailleX; x++) {
-            for (int y = 0; y < grilleTailleY; y++) {
+    public boolean estPlein() {
+        for (int x = 0; x < this.getGrilleLigne(); x++) {
+            for (int y = 0; y < this.getGrilleCol(); y++) {
                 // Si une case est vide, la grille n'est pas pleine
-                if (grille[x][y] == 0)
+                if (this.getGrille()[x][y] == 0)
                     return false;
             }
         }

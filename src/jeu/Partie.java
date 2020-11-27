@@ -51,20 +51,20 @@ public class Partie {
     }
 
     //Setters & Getters
-    int[][] getGrille() { return this.grille; }
+    public int[][] getGrille() { return this.grille; }
 
-    int getGrilleLigne() { return this.grilleLigne; }
+    public int getGrilleLigne() { return this.grilleLigne; }
 
-    int getGrilleCol() { return this.grilleCol; }
+    public int getGrilleCol() { return this.grilleCol; }
 
-    void setGrilleLigne(int grilleLigne) { this.grilleLigne = grilleLigne; }
+    public void setGrilleLigne(int grilleLigne) { this.grilleLigne = grilleLigne; }
 
-    void setGrilleCol(int grilleCol) { this.grilleCol = grilleCol; }
+    public void setGrilleCol(int grilleCol) { this.grilleCol = grilleCol; }
 
-    int caseDisponible(int y) {
+    public int caseDisponible(int y) {
         int currX = 0;
-        while (currX < grilleLigne) {
-            if (grille[currX][y] != 0)
+        while (currX < this.getGrilleLigne()) {
+            if (this.getGrille()[currX][y] != 0)
                 currX++;
             else
                 return currX;
@@ -72,7 +72,7 @@ public class Partie {
         return -1;
     }
 
-    void setCaseGrille(int colonne, int motif) {
+    public void setCaseGrille(int colonne, int motif) {
         int ligne = caseDisponible(colonne);
         if (ligne != -1) {
             this.grille[ligne][colonne] = motif;
