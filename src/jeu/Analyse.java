@@ -19,14 +19,14 @@ public class Analyse extends Partie {
     boolean cherche() {
         // Cherche horizontalement
         for (int y = 0; y < grilleTailleY; y++) {
-            if (true == chercheAlignes(0, y, 1, 0)) {
+            if (chercheAlignes(0, y, 1, 0)) {
                 return true;
             }
         }
 
         // Cherche verticalement
         for (int x = 0; x < grilleTailleX; x++) {
-            if (true == chercheAlignes(x, 0, 0, 1)) {
+            if (chercheAlignes(x, 0, 0, 1)) {
                 return true;
             }
         }
@@ -35,12 +35,12 @@ public class Analyse extends Partie {
         for (int x = 0; x < grilleTailleX; x++) {
             for (int y = 0; y < grilleTailleY; y++) {
                 // Diagonale droite
-                if (true == chercheAlignes(x, y, 1, 1)) {
+                if (chercheAlignes(x, y, 1, 1)) {
                     return true;
                 }
 
                 // Diagonale gauche
-                if (true == chercheAlignes(grilleTailleX - x),y, -1, 1){
+                if (chercheAlignes(grilleTailleX - x, y, -1, 1){
                     return true;
                 }
             }
@@ -67,7 +67,7 @@ public class Analyse extends Partie {
                 compteur++;
             }
 
-            if (compteur == 4 && motif != 0)
+            if (compteur == 4 && currMotif != 0)
                 return true;
 
             currX += pasX;
