@@ -40,7 +40,7 @@ public class Analyse extends Partie {
                 }
 
                 // Diagonale gauche
-                if (true == chercheAlignes(grilleTailleX - x),y, -1, 1){
+                if (chercheAlignes(grilleTailleX - x, y, -1, 1)) {
                     return true;
                 }
             }
@@ -67,7 +67,7 @@ public class Analyse extends Partie {
                 compteur++;
             }
 
-            if (compteur == 4 && motif != 0)
+            if (compteur == 4 && currMotif != 0)
                 return true;
 
             currX += pasX;
