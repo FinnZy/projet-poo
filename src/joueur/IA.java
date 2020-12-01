@@ -16,7 +16,8 @@ public class IA extends Joueur {
         return this.motif;
     }
 
-    public int jouerTour(Joueur ia, Partie partie, Analyse analyse){
+    public int jouerTour(Partie partie){
+        Analyse analyse = new Analyse(partie);
         boolean aDeposer = true;
         if(analyse.estPlein()){
             aDeposer = false;

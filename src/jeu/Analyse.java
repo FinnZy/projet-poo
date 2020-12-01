@@ -1,8 +1,10 @@
 package jeu;
 
 public class Analyse extends Partie {
+    private Partie partie;
     // Constructors
-    Analyse() {
+    Analyse(Partie partie) {
+        this.partie = partie;
     }
 
     // Cherche de potentiels jetons alignés

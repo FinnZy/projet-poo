@@ -25,7 +25,7 @@ public class Partie {
         }
     }
 
-    char getMotifAffichage(int motif) {
+    public char getMotifAffichage(int motif) {
         if (motif == 0) return '.';
         else if (motif == 1) return 'x';
         else return 'o';

@@ -17,7 +17,7 @@ public class Humain extends Joueur {
         return this.motif;
     }
 
-    public int jouerTour(Joueur humain, Partie partie, Analyse analyse) {
+    public int jouerTour(Partie partie) {
         return 0;
     }
 
