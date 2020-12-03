@@ -31,7 +31,7 @@ public class Partie {
         else return 'o';
     }
 
-    void afficherGrille(Partie p) {
+    /*void afficherGrille(Partie p) {
         StringBuilder s = new StringBuilder(new String());
         int[][] grille = p.getGrille();
         s.append("1");
@@ -48,7 +48,7 @@ public class Partie {
             System.out.println(s);
         }
         System.out.println("$ ");
-    }
+    }*/
 
     //Setters & Getters
     public int[][] getGrille() { return this.grille; }
@@ -61,19 +61,9 @@ public class Partie {
 
     public void setGrilleCol(int grilleCol) { this.grilleCol = grilleCol; }
 
-    public int caseDisponible(int y) {
-        int currX = 0;
-        while (currX < this.getGrilleLigne()) {
-            if (this.getGrille()[currX][y] != 0)
-                currX++;
-            else
-                return currX;
-        }
-        return -1;
-    }
-
     public void setCaseGrille(int colonne, int motif) {
-        int ligne = caseDisponible(colonne);
+        Analyse analyse = new Analyse(this);
+        int ligne = analyse.caseDisponible(colonne);
         if (ligne != -1) {
             this.grille[ligne][colonne] = motif;
         }

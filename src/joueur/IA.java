@@ -26,12 +26,12 @@ public class IA extends Joueur {
             while(aDeposer){
                 double x = Math.random() * 7;
                 int y = 6;
-                if(partie.caseDisponible(y) == -1){
+                if(analyse.caseDisponible(y) == -1){
                     aDeposer = true;
                 }
 
                 else {
-                    partie.setCaseGrille((int) x, ia.motif);
+                    partie.setCaseGrille((int) x, this.getMotif());
                     aDeposer = false;
                 }
             }

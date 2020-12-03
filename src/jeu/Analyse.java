@@ -3,7 +3,7 @@ package jeu;
 public class Analyse extends Partie {
     private Partie partie;
     // Constructors
-    Analyse(Partie partie) {
+    public Analyse(Partie partie) {
         this.partie = partie;
     }
 
@@ -49,9 +49,9 @@ public class Analyse extends Partie {
         int currX = debutX;
         int currY = debutY;
 
-        int[][] grille = this.getGrille();
-        int grilleTailleY = this.getGrilleCol();
-        int grilleTailleX = this.getGrilleLigne();
+        int[][] grille = this.partie.getGrille();
+        int grilleTailleY = this.partie.getGrilleCol();
+        int grilleTailleX = this.partie.getGrilleLigne();
 
         currMotif = grille[currX][currY];
 
@@ -73,11 +73,22 @@ public class Analyse extends Partie {
         return false;
     }
 
+    public int caseDisponible(int y) {
+        int currX = 0;
+        while (currX < this.partie.getGrilleLigne()) {
+            if (this.partie.getGrille()[currX][y] != 0)
+                currX++;
+            else
+                return currX;
+        }
+        return -1;
+    }
+
     public boolean estPlein() {
-        for (int x = 0; x < this.getGrilleLigne(); x++) {
-            for (int y = 0; y < this.getGrilleCol(); y++) {
+        for (int x = 0; x < this.partie.getGrilleLigne(); x++) {
+            for (int y = 0; y < this.partie.getGrilleCol(); y++) {
                 // Si une case est vide, la grille n'est pas pleine
-                if (this.getGrille()[x][y] == 0)
+                if (this.partie.getGrille()[x][y] == 0)
                     return false;
             }
         }
