@@ -38,11 +38,11 @@ public class EcrireFichier {
     }
 
 
-    private void writeActions(String name, int numero, int case){
+    private void writeActions(String name, int numero, int caseToWrite){
         FileWriter writer = null;
         try {
             String numeroJoueur = String.valueOf(numero);
-            String positionCaseX = String.valueOf(case);
+            String positionCaseX = String.valueOf(caseToWrite);
             String affichageAction = "Joueur" + numeroJoueur + "joue" + positionCaseX;
 
             writer = new FileWriter(this.log);
