@@ -2,6 +2,8 @@ package joueur;
 
 import jeu.*;
 
+import java.util.Random;
+
 public abstract class Joueur {
 
     protected String nom;
@@ -31,5 +33,5 @@ public abstract class Joueur {
         this.motif = motif;
     }
 
-    public abstract int jouerTour(Partie partie);
+    public abstract int jouerTour(Partie partie, Random rnd);
 }

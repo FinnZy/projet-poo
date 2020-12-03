@@ -1,6 +1,8 @@
 package joueur;
 
 import jeu.*;
+
+import java.util.Random;
 import java.util.Scanner;
 
 public class Humain extends Joueur {
@@ -18,33 +20,23 @@ public class Humain extends Joueur {
         return this.motif;
     }
 
-    public int jouerTour(Partie partie) {
+    public int jouerTour(Partie partie, Random rnd) {
         Analyse analyse = new Analyse(partie);
         boolean aDeposer = true;
         if(analyse.estPlein()){
             aDeposer = false;
-        }
-        else{
-            while(aDeposer){
+        } else {
+            while(aDeposer) {
 
                 Scanner sc = new Scanner(System.in);
-                double x = sc.nextDouble();
-                if(x <= 7 && x > 0){
+                int x = sc.nextInt();
+                if (x > 7 || x <= 0){
                     System.out.println("Entrer un nombre compris entre 1 et 7");
+                } else {
+                    x--;
+                    partie.setCaseGrille(x, this.getMotif(), analyse);
+                    aDeposer = false;
                 }
-
-                else{
-                    int y = 6;
-                    if(analyse.caseDisponible(y) == -1){
-                        aDeposer = true;
-                    }
-
-                    else {
-                        partie.setCaseGrille((int) x, this.getMotif());
-                        aDeposer = false;
-                    }
-                }
-
             }
         }
 
