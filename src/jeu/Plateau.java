@@ -8,11 +8,11 @@ public class Plateau {
     private Partie partie;
     private Analyse analyse;
 
-    Plateau(Joueur joueur1, Joueur joueur2) {
+    Plateau(Joueur joueur1, Joueur joueur2, Partie partie, Analyse analyse) {
         this.joueur1 = joueur1;
         this.joueur2 = joueur2;
-        partie = new Partie();
-        analyse = new Analyse(partie);
+        this.partie = partie;
+        this.analyse = analyse;
     }
 
     public void jouer() {

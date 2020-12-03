@@ -1,5 +1,8 @@
 package jeu;
 
+import joueur.Joueur;
+import ui.Affichage;
+
 public class Partie {
     int[][] grille;
 
@@ -70,6 +73,9 @@ public class Partie {
     }
 
     public static void main(String[] args) {
+        Partie p = new Partie();
+        Affichage a = new Affichage(p);
+        a.afficherGrille();
 
     }
 
