@@ -1,5 +1,13 @@
 package jeu;
 
+import joueur.Humain;
+import joueur.IA;
+import joueur.Joueur;
+import ui.Affichage;
+import ui.Input;
+
+import java.util.Random;
+
 public class Partie {
     int[][] grille;
 
@@ -31,25 +39,6 @@ public class Partie {
         else return 'o';
     }
 
-    /*void afficherGrille(Partie p) {
-        StringBuilder s = new StringBuilder(new String());
-        int[][] grille = p.getGrille();
-        s.append("1");
-        for (int i = 2; i <= p.getGrilleCol(); i++) {
-            String tmp = String.format("%d", i);
-            s.append(" ").append(tmp);
-        }
-        System.out.println(s);
-        for (int j = 1; j <= p.getGrilleLigne(); j++) {
-            s = new StringBuilder("\0");
-            for (int i = 1; i <= p.getGrilleCol(); i++) {
-                s.append(getMotifAffichage(grille[j][i])).append(" ");
-            }
-            System.out.println(s);
-        }
-        System.out.println("$ ");
-    }*/
-
     //Setters & Getters
     public int[][] getGrille() { return this.grille; }
 
@@ -61,8 +50,7 @@ public class Partie {
 
     public void setGrilleCol(int grilleCol) { this.grilleCol = grilleCol; }
 
-    public void setCaseGrille(int colonne, int motif) {
-        Analyse analyse = new Analyse(this);
+    public void setCaseGrille(int colonne, int motif, Analyse analyse) {
         int ligne = analyse.caseDisponible(colonne);
         if (ligne != -1) {
             this.grille[ligne][colonne] = motif;
@@ -70,6 +58,40 @@ public class Partie {
     }
 
     public static void main(String[] args) {
+        Random rnd = new Random();
+
+        Partie p = new Partie();
+        Affichage a = new Affichage(p);
+        Input i = new Input();
+        Analyse analyse = new Analyse(p);
+        Joueur joueur1;
+        Joueur joueur2;
+
+        // Initialisation des joueurs
+        /* Joueur 1 */
+        i.initialiserJeu(1);
+        //System.out.println(i.getJoueurType() + " " + i.getJoueurNom());
+        if (i.getJoueurType().equals("humain")) {
+            joueur1 = new Humain(1, i.getJoueurNom());
+            System.out.println("J1 : humain");
+        } else {
+            joueur1 = new IA(1, i.getJoueurNom());
+            System.out.println("J1 : ia");
+        }
+
+        /* Joueur 2 */
+        i.initialiserJeu(2);
+        //System.out.println(i.getJoueurType() + " " + i.getJoueurNom());
+        if (i.getJoueurType().equals("humain")) {
+            joueur2 = new Humain(2, i.getJoueurNom());
+            System.out.println("J2 : humain");
+        } else {
+            joueur2 = new IA(2, i.getJoueurNom());
+            System.out.println("J2 : ia");
+        }
+
+        Plateau monPlateau = new Plateau(joueur1, joueur2, p, analyse, a);
+        monPlateau.jouer(rnd);
 
     }
 

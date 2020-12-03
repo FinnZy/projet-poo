@@ -2,6 +2,8 @@ package joueur;
 
 import jeu.*;
 
+import java.util.Random;
+
 public class IA extends Joueur {
 
     public IA(int motif, String nom){
@@ -16,24 +18,16 @@ public class IA extends Joueur {
         return this.motif;
     }
 
-    public int jouerTour(Partie partie){
+    public int jouerTour(Partie partie, Random rnd){
         Analyse analyse = new Analyse(partie);
         boolean aDeposer = true;
         if(analyse.estPlein()){
             aDeposer = false;
-        }
-        else{
+        } else {
             while(aDeposer){
-                double x = Math.random() * 7;
-                int y = 6;
-                if(analyse.caseDisponible(y) == -1){
-                    aDeposer = true;
-                }
-
-                else {
-                    partie.setCaseGrille((int) x, this.getMotif());
-                    aDeposer = false;
-                }
+                int x = rnd.nextInt(5);
+                partie.setCaseGrille(x, this.getMotif(), analyse);
+                aDeposer = false;
             }
         }
 

@@ -1,6 +1,6 @@
 package jeu;
 
-public class Analyse extends Partie {
+public class Analyse {
     private Partie partie;
     // Constructors
     public Analyse(Partie partie) {
@@ -10,29 +10,29 @@ public class Analyse extends Partie {
     // Cherche de potentiels jetons alignés
     public boolean cherche() {
         // Cherche horizontalement
-        for (int y = 0; y < this.getGrilleCol(); y++) {
+        for (int y = 0; y < this.partie.getGrilleCol(); y++) {
             if (chercheAlignes(0, y, 1, 0)) {
                 return true;
             }
         }
 
         // Cherche verticalement
-        for (int x = 0; x < this.getGrilleLigne(); x++) {
+        for (int x = 0; x < this.partie.getGrilleLigne(); x++) {
             if (chercheAlignes(x, 0, 0, 1)) {
                 return true;
             }
         }
 
         // Cherche sur les diagonales gauche et droite
-        for (int x = 0; x < this.getGrilleLigne(); x++) {
-            for (int y = 0; y < this.getGrilleCol(); y++) {
+        for (int x = 0; x < this.partie.getGrilleLigne(); x++) {
+            for (int y = 0; y < this.partie.getGrilleCol(); y++) {
                 // Diagonale droite
                 if (chercheAlignes(x, y, 1, 1)) {
                     return true;
                 }
 
                 // Diagonale gauche
-                if (chercheAlignes(this.getGrilleCol() - x, y, -1, 1)) {
+                if (chercheAlignes(this.partie.getGrilleLigne() - 1 - x, y, -1, 1)) {
                     return true;
                 }
             }
@@ -54,6 +54,7 @@ public class Analyse extends Partie {
         int grilleTailleX = this.partie.getGrilleLigne();
 
         currMotif = grille[currX][currY];
+        //System.out.printf("%d, %d\n", currX, currY);
 
         while ((currX < grilleTailleX) && (currY < grilleTailleY) && (currX >= 0)) {
             if (grille[currX][currY] != currMotif) {
@@ -74,10 +75,11 @@ public class Analyse extends Partie {
     }
 
     public int caseDisponible(int y) {
-        int currX = 0;
-        while (currX < this.partie.getGrilleLigne()) {
-            if (this.partie.getGrille()[currX][y] != 0)
-                currX++;
+        int currX = this.partie.getGrilleLigne() - 1;
+        while (currX >= 0) {
+            if (this.partie.getGrille()[currX][y] != 0) {
+                currX--;
+            }
             else
                 return currX;
         }
