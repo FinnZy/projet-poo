@@ -6,16 +6,8 @@ import java.util.Random;
 
 public class IA extends Joueur {
 
-    public IA(int motif, String nom){
-        super(motif, nom);
-    }
-
-    public String getNom(){
-        return this.nom;
-    }
-
-    public int getMotif(){
-        return this.motif;
+    public IA(int motif, String nom, int numeroJoueur, int score){
+        super(motif, nom, numeroJoueur, score);
     }
 
     public int jouerTour(Partie partie, Random rnd){
