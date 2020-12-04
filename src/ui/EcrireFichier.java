@@ -3,7 +3,6 @@ package ui;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 
 public class EcrireFichier {
 
@@ -60,7 +59,52 @@ public class EcrireFichier {
         }
     }
 
+    private void writeMancheTransition(int score1, int score2, int numero){
+        FileWriter writer = null;
+        try {
+            String numeroJoueur = String.valueOf(numero);
+
+            String affichageVictoire = null;
+            String affichageEtatJeu = null;
+
+            // Gestion cas victoire ou egalite
+
+            if(score1 < score2 || score1 > score2){
+                affichageVictoire = "Joueur" + numeroJoueur + "gagne" ;
+            }
+
+            else{
+                affichageVictoire = "Egalite" ;
+            }
+
+            String affichageScore = "score :" + score1 + "-" +  score2 ;
+
+            // Gestion nombre de manches remportees
+
+            if(score1 >= 3 || score2 >= 3){
+                affichageEtatJeu = "Partie finie" ;
+            }
+
+            else{
+                affichageEtatJeu = "Manche commence" ;
+            }
 
 
 
+            writer = new FileWriter(this.log);
+            writer.write(affichageVictoire);
+            writer.write(affichageScore);
+            writer.write(affichageEtatJeu);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally{
+            try {
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
