@@ -14,10 +14,18 @@ public class Input {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         System.out.printf("Joueur %d?\n", i);
 
-        String inputString = myObj.nextLine();  // Read user input
-        int a = inputString.indexOf(' ');
-        String splittedString1 = inputString.substring(0, a);
-        String splittedString2 = inputString.substring(a + 1);
+        String splittedString1 = "";
+        String splittedString2 = "";
+
+        while (!splittedString1.equalsIgnoreCase("humain") && !splittedString1.equalsIgnoreCase("ia")) {
+            String inputString = myObj.nextLine();  // Read user input
+            int a = inputString.indexOf(' ');
+            splittedString1 = inputString.substring(0, a);
+            splittedString2 = inputString.substring(a + 1);
+
+            if (!splittedString1.equalsIgnoreCase("humain") && !splittedString1.equalsIgnoreCase("ia"))
+                System.out.println("Veuillez choisir entre humain et IA comme type de joueur");
+        }
 
         setJoueurType(splittedString1);
         setJoueurNom(splittedString2);
