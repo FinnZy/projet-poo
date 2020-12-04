@@ -8,16 +8,9 @@ import java.util.Scanner;
 public class Humain extends Joueur {
 
 
-    public Humain(int motif, String nom){
-        super(motif, nom);
-    }
+    public Humain(int motif, String nom, int numeroJoueur, int score){
 
-    public String getNom(){
-        return this.nom;
-    }
-
-    public int getMotif(){
-        return this.motif;
+        super(motif, nom, numeroJoueur, score);
     }
 
     public int jouerTour(Partie partie, Random rnd) {

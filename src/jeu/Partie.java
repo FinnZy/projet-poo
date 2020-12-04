@@ -72,10 +72,10 @@ public class Partie {
         i.initialiserJeu(1);
         //System.out.println(i.getJoueurType() + " " + i.getJoueurNom());
         if (i.getJoueurType().equals("humain")) {
-            joueur1 = new Humain(1, i.getJoueurNom());
+            joueur1 = new Humain(1, i.getJoueurNom(), 1, 0);
             System.out.println("J1 : humain");
         } else {
-            joueur1 = new IA(1, i.getJoueurNom());
+            joueur1 = new IA(1, i.getJoueurNom(), 1, 0);
             System.out.println("J1 : ia");
         }
 
@@ -83,10 +83,10 @@ public class Partie {
         i.initialiserJeu(2);
         //System.out.println(i.getJoueurType() + " " + i.getJoueurNom());
         if (i.getJoueurType().equals("humain")) {
-            joueur2 = new Humain(2, i.getJoueurNom());
+            joueur2 = new Humain(2, i.getJoueurNom(), 2, 0);
             System.out.println("J2 : humain");
         } else {
-            joueur2 = new IA(2, i.getJoueurNom());
+            joueur2 = new IA(2, i.getJoueurNom(), 1, 0);
             System.out.println("J2 : ia");
         }
 
