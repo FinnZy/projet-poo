@@ -50,10 +50,21 @@ public class Partie {
 
     public void setGrilleCol(int grilleCol) { this.grilleCol = grilleCol; }
 
-    public void setCaseGrille(int colonne, int motif, Analyse analyse) {
+    public int setCaseGrille(int colonne, int motif, Analyse analyse) {
         int ligne = analyse.caseDisponible(colonne);
         if (ligne != -1) {
             this.grille[ligne][colonne] = motif;
+        }
+        return ligne;
+    }
+
+    public void resetGrille() {
+        int ligne = grille.length;
+        int colonne = grille[0].length;
+        for (int l = 0; l < ligne; l++) {
+            for (int c = 0; c < colonne; c++) {
+                grille[l][c] = vide;
+            }
         }
     }
 
@@ -72,10 +83,10 @@ public class Partie {
         i.initialiserJeu(1);
         //System.out.println(i.getJoueurType() + " " + i.getJoueurNom());
         if (i.getJoueurType().equals("humain")) {
-            joueur1 = new Humain(1, i.getJoueurNom(), 1, 0);
+            joueur1 = new Humain(1, i.getJoueurNom());
             System.out.println("J1 : humain");
         } else {
-            joueur1 = new IA(1, i.getJoueurNom(), 1, 0);
+            joueur1 = new IA(1, i.getJoueurNom());
             System.out.println("J1 : ia");
         }
 
@@ -83,15 +94,17 @@ public class Partie {
         i.initialiserJeu(2);
         //System.out.println(i.getJoueurType() + " " + i.getJoueurNom());
         if (i.getJoueurType().equals("humain")) {
-            joueur2 = new Humain(2, i.getJoueurNom(), 2, 0);
+            joueur2 = new Humain(2, i.getJoueurNom());
             System.out.println("J2 : humain");
         } else {
-            joueur2 = new IA(2, i.getJoueurNom(), 1, 0);
+            joueur2 = new IA(2, i.getJoueurNom());
             System.out.println("J2 : ia");
         }
 
-        Plateau monPlateau = new Plateau(joueur1, joueur2, p, analyse, a);
-        monPlateau.jouer(rnd);
+        Plateau monPlateau = new Plateau(joueur1, joueur2, p, analyse, a, 3);
+        // Affichage de la grille vide
+        a.afficherGrille();
+        monPlateau.jouer(rnd, 1);
 
     }
 

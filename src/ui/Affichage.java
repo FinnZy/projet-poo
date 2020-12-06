@@ -14,6 +14,7 @@ public class Affichage {
         int maxCol = partie.getGrilleCol();
         int grillePartie[][] = partie.getGrille();
 
+        System.out.printf("\n");
         for (int i = 0; i < maxLigne + 1; i++) {
             for (int j = 0; j < maxCol; j++) {
                 // Affichage des numéros de colonne
@@ -27,5 +28,6 @@ public class Affichage {
             // Retour à la ligne à la fin de l'affichage de chaque colonne
             System.out.printf("\n");
         }
+        System.out.printf("\n");
     }
 }

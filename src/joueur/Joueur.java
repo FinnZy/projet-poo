@@ -11,12 +11,12 @@ public abstract class Joueur {
     private int numeroJoueur;
     private int score;
 
-    public Joueur(int motif, String nom, int numeroJoueur, int score){
+    public Joueur(int motif, String nom){
 
         this.nom = nom;
         this.motif = motif;
-        this.numeroJoueur = numeroJoueur;
-        this.score = score;
+        this.numeroJoueur = motif;
+        this.score = 0;
     }
 
 
@@ -49,8 +49,8 @@ public abstract class Joueur {
         this.numeroJoueur = numeroJoueur;
     }
 
-    private void setScore(int score){
-        this.score = score;
+    public void incScore(){
+        this.score += 1;
     }
 
     public abstract int jouerTour(Partie partie, Random rnd);

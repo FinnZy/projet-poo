@@ -6,8 +6,8 @@ import java.util.Random;
 
 public class IA extends Joueur {
 
-    public IA(int motif, String nom, int numeroJoueur, int score){
-        super(motif, nom, numeroJoueur, score);
+    public IA(int motif, String nom){
+        super(motif, nom);
     }
 
     public int jouerTour(Partie partie, Random rnd){
@@ -18,8 +18,12 @@ public class IA extends Joueur {
         } else {
             while(aDeposer){
                 int x = rnd.nextInt(5);
-                partie.setCaseGrille(x, this.getMotif(), analyse);
-                aDeposer = false;
+                int check = partie.setCaseGrille(x, this.getMotif(), analyse);
+                if (check == -1) {
+                    aDeposer = true;
+                } else {
+                    aDeposer = false;
+                }
             }
         }
 

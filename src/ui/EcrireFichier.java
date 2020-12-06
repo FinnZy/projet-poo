@@ -18,7 +18,7 @@ public class EcrireFichier {
         FileWriter writer = null;
         try {
             String completeName1 = "Joueur 1 est" + name1;
-            String completeName2 = "Joueur 2 est" + name1;
+            String completeName2 = "Joueur 2 est" + name2;
             String debutPartie = "Manche commence";
             writer = new FileWriter(this.log);
             writer.write(completeName1);

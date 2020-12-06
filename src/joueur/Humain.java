@@ -8,9 +8,9 @@ import java.util.Scanner;
 public class Humain extends Joueur {
 
 
-    public Humain(int motif, String nom, int numeroJoueur, int score){
+    public Humain(int motif, String nom){
 
-        super(motif, nom, numeroJoueur, score);
+        super(motif, nom);
     }
 
     public int jouerTour(Partie partie, Random rnd) {
@@ -27,8 +27,13 @@ public class Humain extends Joueur {
                     System.out.println("Entrer un nombre compris entre 1 et 7");
                 } else {
                     x--;
-                    partie.setCaseGrille(x, this.getMotif(), analyse);
-                    aDeposer = false;
+                    int check = partie.setCaseGrille(x, this.getMotif(), analyse);
+                    if (check == -1) {
+                        System.out.println("La case choisie est pleine, veuillez en choisir une autre !");
+                        aDeposer = true;
+                    } else {
+                        aDeposer = false;
+                    }
                 }
             }
         }
