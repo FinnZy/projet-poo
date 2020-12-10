@@ -1,27 +1,27 @@
 package jeu;
 
-import joueur.Humain;
-import joueur.IA;
-import joueur.Joueur;
-import ui.Affichage;
-import ui.Input;
+import joueur.*;
+import ui.*;
 
+import java.io.IOException;
 import java.util.Random;
 
 public class Partie {
-    int[][] grille;
+    private int[][] grille;
 
-    int vide = 0;
-    int x = 1;
-    int o = 2;
-    int grilleLigne;
-    int grilleCol;
+    private int vide = 0;
+    private int x = 1;
+    private int o = 2;
+    private int grilleLigne;
+    private int grilleCol;
+    private EcrireFichier ef;
 
     //Constructors
-    Partie() {
+    Partie(EcrireFichier ef) {
         setGrilleLigne(6);
         setGrilleCol(7);
         creerGrille(this.getGrilleLigne(), this.getGrilleCol());
+        this.ef = ef;
     }
 
     void creerGrille(int ligne, int colonne) {
@@ -54,6 +54,10 @@ public class Partie {
         int ligne = analyse.caseDisponible(colonne);
         if (ligne != -1) {
             this.grille[ligne][colonne] = motif;
+        } else {
+            int vraieColonne = colonne + 1;
+            System.out.println("La colonne " + vraieColonne + " est pleine, veuillez en choisir une autre !");
+            ef.ecrireErreurColonne("pleine", String.valueOf(vraieColonne));
         }
         return ligne;
     }
@@ -68,12 +72,13 @@ public class Partie {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Random rnd = new Random();
 
-        Partie p = new Partie();
+        EcrireFichier ef = new EcrireFichier();
+        Partie p = new Partie(ef);
         Affichage a = new Affichage(p);
-        Input i = new Input();
+        Input i = new Input(ef);
         Analyse analyse = new Analyse(p);
         Joueur joueur1;
         Joueur joueur2;
@@ -89,6 +94,7 @@ public class Partie {
             joueur1 = new IA(1, i.getJoueurNom());
             System.out.println("J1 : ia");
         }
+        ef.writeName(1, i.getJoueurType() + " " + i.getJoueurNom());
 
         /* Joueur 2 */
         i.initialiserJeu(2);
@@ -100,12 +106,12 @@ public class Partie {
             joueur2 = new IA(2, i.getJoueurNom());
             System.out.println("J2 : ia");
         }
+        ef.writeName(2, i.getJoueurType() + " " + i.getJoueurNom());
 
-        Plateau monPlateau = new Plateau(joueur1, joueur2, p, analyse, a, 3);
+        Plateau monPlateau = new Plateau(joueur1, joueur2, p, analyse, a, 3, ef);
         // Affichage de la grille vide
         a.afficherGrille();
+        ef.writeManche();
         monPlateau.jouer(rnd, 1);
-
     }
-
 }

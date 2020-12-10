@@ -2,7 +2,7 @@ package jeu;
 
 import joueur.Joueur;
 import ui.Affichage;
-
+import ui.EcrireFichier;
 import java.util.Random;
 
 public class Plateau {
@@ -11,10 +11,11 @@ public class Plateau {
     private Partie partie;
     private Analyse analyse;
     private Affichage affichage;
+    private EcrireFichier ef;
     private int nbrManches;
     private int manchesJouees;
 
-    Plateau(Joueur joueur1, Joueur joueur2, Partie partie, Analyse analyse, Affichage affichage, int nbrManches) {
+    Plateau(Joueur joueur1, Joueur joueur2, Partie partie, Analyse analyse, Affichage affichage, int nbrManches, EcrireFichier ef) {
         this.joueur1 = joueur1;
         this.joueur2 = joueur2;
         this.partie = partie;
@@ -22,6 +23,7 @@ public class Plateau {
         this.affichage = affichage;
         this.nbrManches = nbrManches;
         this.manchesJouees = 0;
+        this.ef = ef;
     }
 
     public void jouer(Random rnd, int joueurQuiCommence) {
@@ -40,6 +42,7 @@ public class Plateau {
         if (manchesJouees < nbrManches - 1) {
             if (vainqueur == -1) {
                 System.out.println("Manche terminée ! Match nul !");
+                ef.writeMancheTransition(joueur1.getScore(), joueur2.getScore(), vainqueur, nbrManches);
 
                 // Réinitialisation et redémarrage de la manche
                 partie.resetGrille();
@@ -61,11 +64,12 @@ public class Plateau {
 
                 // Affichage de la ligne de victoire pour le gagnant
                 System.out.println("Bravo ! Le joueur " + vainqueurNom + " gagne cette manche !");
+                ef.writeMancheTransition(joueur1.getScore(), joueur2.getScore(), vainqueur, nbrManches);
 
                 this.manchesJouees += 1;    // Incrémentation du nombre de manches jouées
                 partie.resetGrille();       // Réinitialisation de la grille
                 affichage.afficherGrille(); // Affichage de la grille vide
-                this.jouer(rnd, perdant);            // Retour dans la boucle de jeu
+                this.jouer(rnd, perdant);   // Retour dans la boucle de jeu
             }
         } else {
             String vainqueurNom = "";
@@ -93,13 +97,14 @@ public class Plateau {
                 // Affichage de la ligne de victoire pour le gagnant
                 System.out.println("Bravo ! Le joueur " + vainqueurNom + " remporte la partie !");
             }
+            ef.writeMancheTransition(joueur1.getScore(), joueur2.getScore(), vainqueur, nbrManches);
         }
     }
 
     private int joueurUnCommence(Random rnd) {
         int vainqueur = -1;
 
-        joueur1.jouerTour(partie, rnd);
+        joueur1.jouerTour(partie, ef, rnd);
         affichage.afficherGrille();
         // Regarde si le premier joueur est le vainqueur de la partie
         if (analyse.cherche()) {
@@ -107,7 +112,7 @@ public class Plateau {
             return vainqueur;
         }
 
-        joueur2.jouerTour(partie, rnd);
+        joueur2.jouerTour(partie, ef, rnd);
         affichage.afficherGrille();
         // Regarde si le deuxième joueur est le vainqueur de la partie
         if (analyse.cherche()) {
@@ -126,7 +131,7 @@ public class Plateau {
     private int joueurDeuxCommence(Random rnd) {
         int vainqueur = -1;
 
-        joueur2.jouerTour(partie, rnd);
+        joueur2.jouerTour(partie, ef, rnd);
         affichage.afficherGrille();
         // Regarde si le deuxième joueur est le vainqueur de la partie
         if (analyse.cherche()) {
@@ -134,7 +139,7 @@ public class Plateau {
             return vainqueur;
         }
 
-        joueur1.jouerTour(partie, rnd);
+        joueur1.jouerTour(partie, ef, rnd);
         affichage.afficherGrille();
         // Regarde si le premier joueur est le vainqueur de la partie
         if (analyse.cherche()) {

@@ -1,45 +1,56 @@
 package joueur;
 
 import jeu.*;
+import ui.EcrireFichier;
 
 import java.util.Random;
 import java.util.Scanner;
 
 public class Humain extends Joueur {
 
-
-    public Humain(int motif, String nom){
-
+    public Humain(int motif, String nom) {
         super(motif, nom);
     }
 
-    public int jouerTour(Partie partie, Random rnd) {
+    public int jouerTour(Partie partie, EcrireFichier ef, Random rnd) {
         Analyse analyse = new Analyse(partie);
         boolean aDeposer = true;
-        if(analyse.estPlein()){
+        boolean estUnNombre = false;
+
+        if(analyse.estPlein()) {
             aDeposer = false;
         } else {
             while(aDeposer) {
-
+                estUnNombre = true;
                 Scanner sc = new Scanner(System.in);
-                int x = sc.nextInt();
-                if (x > 7 || x <= 0){
-                    System.out.println("Entrer un nombre compris entre 1 et 7");
-                } else {
-                    x--;
-                    int check = partie.setCaseGrille(x, this.getMotif(), analyse);
-                    if (check == -1) {
-                        System.out.println("La case choisie est pleine, veuillez en choisir une autre !");
-                        aDeposer = true;
+                String valeurLigne = sc.nextLine();
+
+                for (char c : valeurLigne.toCharArray()) {
+                    if (!Character.isDigit(c))
+                        estUnNombre = false;
+                }
+
+                if (estUnNombre) {
+                    int x = Integer.valueOf(valeurLigne);
+                    if (x > 7 || x < 1) {
+                        System.out.println("Entrer un nombre compris entre 1 et 7");
+                        ef.ecrireErreurColonne("non valide", valeurLigne);
                     } else {
-                        aDeposer = false;
+                        x--;
+                        int check = partie.setCaseGrille(x, this.getMotif(), analyse);
+                        if (check == -1) {
+                            aDeposer = true;
+                        } else {
+                            ef.writeActions(this.getNom(), this.getNumeroJoueur(), x + 1);
+                            aDeposer = false;
+                        }
                     }
+                } else {
+                    System.out.println("Seuls les nombres compris entre 1 et 7 sont autorisés");
+                    ef.ecrireErreurSaisie("colonne", valeurLigne);
                 }
             }
         }
-
         return 0;
     }
-
-
 }

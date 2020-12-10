@@ -7,104 +7,92 @@ import java.io.IOException;
 public class EcrireFichier {
 
     File log;
+    FileWriter writer;
 
-    public EcrireFichier(int motif, String nom){
-
-        this.log = new File("log.txt");
-
+    public EcrireFichier() throws IOException {
+        this.log = new File("puissance4.log");
+        this.writer = new FileWriter(this.log);
     }
 
-    private void writeName(String name1, String name2) {
-        FileWriter writer = null;
+    public void writeName(int numeroJoueur, String name) {
         try {
-            String completeName1 = "Joueur 1 est" + name1;
-            String completeName2 = "Joueur 2 est" + name2;
-            String debutPartie = "Manche commence";
-            writer = new FileWriter(this.log);
-            writer.write(completeName1);
-            writer.write(completeName2);
-            writer.write(debutPartie);
+            String completeName = "Joueur " + numeroJoueur + " est " + name + "\n";
+            writer.write(completeName);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        finally{
-            try {
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    }
+
+    public void writeManche() {
+        try {
+            String ligneManche = "Manche commence\n";
+            writer.write(ligneManche);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-
-    private void writeActions(String name, int numero, int caseToWrite){
-        FileWriter writer = null;
+    public void writePartieFinie() {
         try {
-            String numeroJoueur = String.valueOf(numero);
-            String positionCaseX = String.valueOf(caseToWrite);
-            String affichageAction = "Joueur" + numeroJoueur + "joue" + positionCaseX;
+            String partieFinie = "Partie finie\n";
+            writer.write(partieFinie);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-            writer = new FileWriter(this.log);
+    public void writeActions(String name, int numero, int caseToWrite){
+        try {
+            String affichageAction = "Joueur " + numero + " joue " + caseToWrite + "\n";
             writer.write(affichageAction);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-        finally{
-            try {
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
-    private void writeMancheTransition(int score1, int score2, int numero){
-        FileWriter writer = null;
+    public void writeMancheTransition(int score1, int score2, int numero, int pointsMax) {
         try {
-            String numeroJoueur = String.valueOf(numero);
-
             String affichageVictoire = null;
-            String affichageEtatJeu = null;
 
             // Gestion cas victoire ou egalite
-
-            if(score1 < score2 || score1 > score2){
-                affichageVictoire = "Joueur" + numeroJoueur + "gagne" ;
+            if(numero == -1) {
+                affichageVictoire = "Egalite\n";
+            } else {
+                affichageVictoire = "Joueur " + numero + " gagne\n";
             }
 
-            else{
-                affichageVictoire = "Egalite" ;
-            }
+            String affichageScore = "Score " + score1 + " - " +  score2 + "\n";
 
-            String affichageScore = "score :" + score1 + "-" +  score2 ;
-
-            // Gestion nombre de manches remportees
-
-            if(score1 >= 3 || score2 >= 3){
-                affichageEtatJeu = "Partie finie" ;
-            }
-
-            else{
-                affichageEtatJeu = "Manche commence" ;
-            }
-
-
-
-            writer = new FileWriter(this.log);
             writer.write(affichageVictoire);
             writer.write(affichageScore);
-            writer.write(affichageEtatJeu);
 
+            // Gestion nombre de manches remportees
+            if(score1 + score2 == pointsMax) {
+                writePartieFinie();
+            } else {
+                writeManche();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        finally{
-            try {
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    }
+
+    public void ecrireErreurSaisie(String type, String numero) {
+        try {
+            String affichageErreurSaisie = "Erreur saisie " + type + " " + numero + "\n";
+            writer.write(affichageErreurSaisie);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void ecrireErreurColonne(String type, String numero) {
+        try {
+            String affichageErreurColonne = "Erreur colonne " + type + " " + numero + "\n";
+            writer.write(affichageErreurColonne);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

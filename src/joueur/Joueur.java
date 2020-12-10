@@ -1,6 +1,7 @@
 package joueur;
 
 import jeu.*;
+import ui.EcrireFichier;
 
 import java.util.Random;
 
@@ -12,13 +13,11 @@ public abstract class Joueur {
     private int score;
 
     public Joueur(int motif, String nom){
-
         this.nom = nom;
         this.motif = motif;
         this.numeroJoueur = motif;
         this.score = 0;
     }
-
 
     public String getNom(){
         return this.nom;
@@ -36,7 +35,6 @@ public abstract class Joueur {
         return this.score;
     }
 
-
     private void setNom(String nom){
         this.nom = nom;
     }
@@ -53,5 +51,5 @@ public abstract class Joueur {
         this.score += 1;
     }
 
-    public abstract int jouerTour(Partie partie, Random rnd);
+    public abstract int jouerTour(Partie partie, EcrireFichier ef, Random rnd);
 }
