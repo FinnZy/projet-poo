@@ -1,40 +1,86 @@
 @startuml
-Joueur --* Plateau : joueur
-Plateau --* Partie : plateau
+Joueur --* Plateau : joueur1
+Joueur --* Plateau : joueur2
+Partie --* Plateau : partie
+Analyse --* Plateau : analyse
+Affichage --* Plateau : affichage
+EcrireFichier --* Plateau : ef
 Humain --|> Joueur
 IA --|> Joueur
+Partie --* Analyse : partie
+EcrireFichier --* Partie : ef
+Partie --* Affichage : partie
+EcrireFichier --* Entree : ef
 
 IA : IA(String nom, int motif)
-IA : void jouerTour(Jeu jeu)
+IA : int jouerTour(Partie partie, EcrireFichier ef, Random aleatoire)
 
 Humain : Humain(String nom, int motif)
-Humain : void jouerTour(Jeu jeu)
+Humain : int jouerTour(Partie partie, EcrireFichier ef, Random aleatoire)
 
 Joueur : String nom
 Joueur : int motif
+Joueur : int numeroJoueur
+Joueur : int score
 Joueur : Joueur(String nom, int motif)
 Joueur : String getNom()
-Joueur : int getCouleur()
-Joueur : void jouerTour(Jeu jeu)
+Joueur : int getMotif()
+Joueur : int getNumeroJoueur()
+Joueur : int getScore()
+Joueur : int incScore()
+Joueur : int jouerTour(Partie partie, EcrireFichier ef, Random aleatoire)
 
-Plateau : Plateau(Joueur joueur1, Joueur joueur2)
-Plateau : void jouer()
+Plateau : int nbrManches
+Plateau : int manchesJouees
+Plateau : Plateau(Joueur joueur1, Joueur joueur2, Partie partie, Analyse analyse, Affichage affichage, int nbrManches, EcrireFichier ef)
+Plateau : void jouer(Random aleatoire, int joueurQuiCommence)
+Plateau : private int joueurUnCommence(Random aleatoire)
+Plateau : private int joueurDeuxCommence(Random aleatoire)
 
-Partie : int[6][7] grille
-Partie : Partie(int[][] grille)
-Partie : Partie()
-Partie : void finPartie(String nom)
-Partie : void creerGrille()
-Partie : void afficherGrille(Joueur joueur1, Joueur joueur2)
-Partie : boolean jouerCoup(int col, Joueur joueur)
-Partie : boolean cherche()
-Partie : boolean chercheAlignes()
-Partie : boolean estPlein()
-Partie : boolean iaAvance(Joueur joueur)
-Partie : int caseProche(int ligne, int colonne)
-Partie : int getTaille()
+Partie : int vide = 0
+Partie : int x = 1
+Partie : int o = 2
+Partie : int grilleLigne
+Partie : int grilleColonne
+Partie : int[][] grille
+Partie : Partie(EcrireFicher ef)
+Partie : void creerGrille(int ligne, int colonne)
+Partie : char getMotifAffichage(int motif)
+Partie : int[][] getGrille()
+Partie : int getGrilleLigne()
+Partie : int getGrilleCol()
+Partie : void setGrilleLigne(int grilleLigne)
+Partie : void setGrilleCol(int grilleCol)
+Partie : int setCaseGrille(int colonne, int motif, Analyse analyse)
+Partie : void reinitGrille()
+Partie : public static void main(String[] args)
 
-Puissance4 : Scanner scanner
-Puissance4 : Puissance4()
-Puissance4 : public static void main(String[] args)
+Analyse : Analyse(Partie partie)
+Analyse : boolean cherche()
+Analyse : boolean chercheAlignes(int debutX, int debutY, int pasX, int pasY)
+Analyse : int caseDisponible(int y)
+Analyse : boolean estPlein()
+
+Affichage : Affichage(Partie partie)
+Affichage : void afficherGrille()
+
+EcrireFichier : File log
+EcrireFichier : FileWriter ecrivain
+EcrireFichier : EcrireFichier()
+EcrireFichier : void ecrireNom(int numeroJoueur, String nom)
+EcrireFichier : void ecrireManche()
+EcrireFichier : void ecrirePartieFinie()
+EcrireFichier : void ecrireActions(int numero, int colonne)
+EcrireFichier : void ecrireMancheTransition(int score1, int score2, int numero, int pointsMax)
+EcrireFichier : void ecrireErreurSaisie(String type, String numero)
+EcrireFichier : void ecrireErreurColonne(String type, String numero)
+
+Entree : String nom
+Entree : String type
+Entree : Entree(EcrireFichier ef)
+Entree : void initialiserJeu(int i)
+Entree : String getJoueurNom()
+Entree : String getJoueurType()
+Entree : void setJoueurNom(String nom)
+Entree : void setJoueurType(String type)
 @enduml
