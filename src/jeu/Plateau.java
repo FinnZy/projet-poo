@@ -29,7 +29,6 @@ public class Plateau {
     public void jouer(Random aleatoire, int joueurQuiCommence) {
         int vainqueur = -1;
         int perdant = -1;
-        System.out.println("C'est au joueur " + joueurQuiCommence + " de commencer");
 
         while (vainqueur == -1 && !analyse.estPlein()) {
             if (joueurQuiCommence == 1)
@@ -41,7 +40,7 @@ public class Plateau {
         // Mise en place des actions à exécuter lorsque la partie est finie
         if (manchesJouees < nbrManches - 1) {
             if (vainqueur == -1) {
-                System.out.println("Manche terminée ! Match nul !");
+                System.out.println("Egalite");
                 ef.ecrireMancheTransition(joueur1.getScore(), joueur2.getScore(), vainqueur, nbrManches);
 
                 // Réinitialisation et redémarrage de la manche
@@ -49,21 +48,17 @@ public class Plateau {
                 affichage.afficherGrille();
                 this.jouer(aleatoire, joueurQuiCommence);
             } else {
-                String vainqueurNom = "";
-
-                // Récupération du nom du vainqueur en fonction du gagnant et incrémentation des scores
+                // Incrémentation des scores et définition du perdant
                 if (vainqueur == 1) {
-                    vainqueurNom = joueur1.getNom();
                     joueur1.incScore();
                     perdant = 2;
                 } else {
-                    vainqueurNom = joueur2.getNom();
                     joueur2.incScore();
                     perdant = 1;
                 }
 
                 // Affichage de la ligne de victoire pour le gagnant
-                System.out.println("Bravo ! Le joueur " + vainqueurNom + " gagne cette manche !");
+                System.out.println("Joueur " + vainqueur + " gagne");
                 ef.ecrireMancheTransition(joueur1.getScore(), joueur2.getScore(), vainqueur, nbrManches);
 
                 this.manchesJouees += 1;    // Incrémentation du nombre de manches jouées
@@ -72,30 +67,18 @@ public class Plateau {
                 this.jouer(aleatoire, perdant);   // Retour dans la boucle de jeu
             }
         } else {
-            String vainqueurNom = "";
-
-            // Récupération du nom du vainqueur en fonction du gagnant et incrémentation des scores
+            // Incrémentation des scores
             if (vainqueur == 1) {
                 joueur1.incScore();
-                // Vérification après incrémentation des scores de qui est le grand gagnant
-                if (joueur1.getScore() > joueur2.getScore())
-                    vainqueurNom = joueur1.getNom();
-                else
-                    vainqueurNom = joueur2.getNom();
             } else {
                 joueur2.incScore();
-                // Vérification après incrémentation des scores de qui est le grand gagnant
-                if (joueur2.getScore() > joueur1.getScore())
-                    vainqueurNom = joueur2.getNom();
-                else
-                    vainqueurNom = joueur1.getNom();
             }
 
             if (vainqueur == -1 || joueur1.getScore() == joueur2.getScore()) {
-                System.out.println("Partie terminée ! Match nul !");
+                System.out.println("Egalite");
             } else {
                 // Affichage de la ligne de victoire pour le gagnant
-                System.out.println("Bravo ! Le joueur " + vainqueurNom + " remporte la partie !");
+                System.out.println("Joueur " + vainqueur + " gagne");
             }
             ef.ecrireMancheTransition(joueur1.getScore(), joueur2.getScore(), vainqueur, nbrManches);
         }

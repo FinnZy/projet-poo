@@ -61,7 +61,7 @@ public class Partie {
         } else {
             // Si la colonne est pleine, retourne une erreur
             int vraieColonne = colonne + 1;
-            System.out.println("La colonne " + vraieColonne + " est pleine, veuillez en choisir une autre !");
+            System.out.println("Erreur colonne pleine " + vraieColonne);
             ef.ecrireErreurColonne("pleine", String.valueOf(vraieColonne));
         }
         return ligne;

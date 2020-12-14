@@ -14,39 +14,40 @@ public class Humain extends Joueur {
 
     public int jouerTour(Partie partie, EcrireFichier ef, Random aleatoire) {
         Analyse analyse = new Analyse(partie);
+        boolean estUnNombre = true;
         boolean aDeposer = true;
-        boolean estUnNombre = false;
 
-        if(analyse.estPlein()) {
-            return 1;
-        } else {
-            while(aDeposer) {
-                estUnNombre = true;
-                Scanner sc = new Scanner(System.in);
-                String valeurLigne = sc.nextLine();
+        while (aDeposer) {
+            aDeposer = true;
+            Scanner sc = new Scanner(System.in);
+            String valeurLigne = sc.nextLine();
 
-                for (char c : valeurLigne.toCharArray()) {
-                    if (!Character.isDigit(c))
-                        estUnNombre = false;
-                }
+            for (char c : valeurLigne.toCharArray()) {
+                if (!Character.isDigit(c) && c != '-' && c != '+')
+                    estUnNombre = false;
+            }
 
-                if (estUnNombre) {
-                    int x = Integer.valueOf(valeurLigne);
-                    if (x > 7 || x < 1) {
-                        System.out.println("Entrer un nombre compris entre 1 et 7");
-                        ef.ecrireErreurColonne("non valide", valeurLigne);
-                    } else {
-                        x--;
-                        int verif = partie.setCaseGrille(x, this.getMotif(), analyse);
-                        if (verif == -1) {
-                            aDeposer = true;
-                        } else {
-                            ef.ecrireActions(this.getNumeroJoueur(), x + 1);
-                            aDeposer = false;
-                        }
-                    }
+            if (estUnNombre) {
+                int x = Integer.valueOf(valeurLigne);
+                if (x > 7 || x < 1) {
+                    System.out.println("Erreur colonne non valide " + x);
+                    ef.ecrireErreurColonne("non valide", valeurLigne);
+                    aDeposer = true;
                 } else {
-                    System.out.println("Seuls les nombres compris entre 1 et 7 sont autorisés");
+                    x--;
+                    int verif = partie.setCaseGrille(x, this.getMotif(), analyse);
+                    ef.ecrireActions(this.getNumeroJoueur(), x + 1);
+                    if (verif == -1) {
+                        aDeposer = true;
+                    } else {
+                        aDeposer = false;
+                    }
+                }
+            } else {
+                if (valeurLigne.equalsIgnoreCase("sortir")) {
+                    System.exit(0);
+                } else {
+                    System.out.println("Erreur saisie colonne " + valeurLigne);
                     ef.ecrireErreurSaisie("colonne", valeurLigne);
                 }
             }

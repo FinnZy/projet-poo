@@ -10,7 +10,7 @@ public class EcrireFichier {
     FileWriter ecrivain;
 
     public EcrireFichier() throws IOException {
-        this.log = new File("puissance4.log");
+        this.log = new File("log.txt");
         this.ecrivain = new FileWriter(this.log);
     }
 
@@ -18,6 +18,7 @@ public class EcrireFichier {
         try {
             String nomComplet = "Joueur " + numeroJoueur + " est " + nom + "\n";
             ecrivain.write(nomComplet);
+            ecrivain.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -27,6 +28,7 @@ public class EcrireFichier {
         try {
             String ligneManche = "Manche commence\n";
             ecrivain.write(ligneManche);
+            ecrivain.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -36,6 +38,7 @@ public class EcrireFichier {
         try {
             String partieFinie = "Partie finie\n";
             ecrivain.write(partieFinie);
+            ecrivain.flush();
             ecrivain.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,6 +49,7 @@ public class EcrireFichier {
         try {
             String affichageAction = "Joueur " + numero + " joue " + colonne + "\n";
             ecrivain.write(affichageAction);
+            ecrivain.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -66,6 +70,7 @@ public class EcrireFichier {
 
             ecrivain.write(affichageVictoire);
             ecrivain.write(affichageScore);
+            ecrivain.flush();
 
             // Gestion nombre de manches remportees
             if(score1 + score2 == pointsMax) {
@@ -82,6 +87,7 @@ public class EcrireFichier {
         try {
             String affichageErreurSaisie = "Erreur saisie " + type + " " + numero + "\n";
             ecrivain.write(affichageErreurSaisie);
+            ecrivain.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -91,6 +97,7 @@ public class EcrireFichier {
         try {
             String affichageErreurColonne = "Erreur colonne " + type + " " + numero + "\n";
             ecrivain.write(affichageErreurColonne);
+            ecrivain.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }

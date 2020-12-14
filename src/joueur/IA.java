@@ -20,10 +20,10 @@ public class IA extends Joueur {
             while(aDeposer){
                 int x = aleatoire.nextInt(5);
                 int verif = partie.setCaseGrille(x, this.getMotif(), analyse);
+                ef.ecrireActions(this.getNumeroJoueur(), x+1);
                 if (verif == -1) {
                     aDeposer = true;
                 } else {
-                    ef.ecrireActions(this.getNumeroJoueur(), x+1);
                     aDeposer = false;
                 }
             }

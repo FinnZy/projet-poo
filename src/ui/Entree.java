@@ -13,19 +13,25 @@ public class Entree {
 
     public void initialiserJeu(int i) {
         Scanner ligneSaisie = new Scanner(System.in);  // Création d'un objet de type Scanner
-        System.out.printf("Joueur %d?\n", i);
 
         // Déclaration des deux chaînes de caractères correspondant au nom et au type
         String chaineDeCaracteres1 = "";
         String chaineDeCaracteres2 = "";
 
         while (!chaineDeCaracteres1.equalsIgnoreCase("humain") && !chaineDeCaracteres1.equalsIgnoreCase("ia")) {
+            System.out.printf("Joueur %d?\n", i);
+
             String chaineEntree = ligneSaisie.nextLine();  // Lecture de l'entrée utilisateur
             int a = chaineEntree.indexOf(' ');  // Récupération de l'index du premier espace
 
+            // Dans le cas où le joueur saisit "sortir"
+            if (chaineEntree.equalsIgnoreCase("sortir")) {
+                System.exit(0);
+            }
+
             // Deux cas : il n'y a pas d'espace ou il y en a un
             if (a == -1) {
-                System.out.println("Veuillez saisir un nom en second argument");
+                System.out.println("Erreur saisie Joueur " + i);
                 ef.ecrireErreurSaisie("Joueur", String.valueOf(i));
             } else {
                 // Séparation des deux arguments
@@ -34,7 +40,7 @@ public class Entree {
 
                 // Vérification du type de joueur
                 if (!chaineDeCaracteres1.equalsIgnoreCase("humain") && !chaineDeCaracteres1.equalsIgnoreCase("ia")) {
-                    System.out.println("Veuillez choisir entre humain et IA comme type de joueur");
+                    System.out.println("Erreur saisie Joueur " + i);
                     ef.ecrireErreurSaisie("Joueur", String.valueOf(i));
                 }
             }

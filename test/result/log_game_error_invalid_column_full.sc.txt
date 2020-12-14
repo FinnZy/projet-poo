@@ -1,0 +1,11 @@
+Joueur 1 est humain moi
+Joueur 2 est humain lui
+Manche commence
+Joueur 1 joue 1
+Joueur 2 joue 1
+Joueur 1 joue 1
+Joueur 2 joue 1
+Joueur 1 joue 1
+Joueur 2 joue 1
+Erreur colonne pleine 1
+Joueur 1 joue 1
